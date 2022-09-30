@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmailSample", "FluentEmailSample\FluentEmailSample.csproj", "{E7AB9A48-5879-452E-9718-EE966AEA8F9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{34F1143A-1BEE-4166-92D1-3FD6AD736710}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7AB9A48-5879-452E-9718-EE966AEA8F9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7AB9A48-5879-452E-9718-EE966AEA8F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7AB9A48-5879-452E-9718-EE966AEA8F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7AB9A48-5879-452E-9718-EE966AEA8F9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F289886D-F455-46F6-A193-767582304ADF}
+	EndGlobalSection
+EndGlobal
