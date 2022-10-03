@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace FluentEmailSample.Extensions;
 
-public static class FluentEmailSendGridBuilderExtensions
+public static class FluentEmailSendinblueBuilderExtensions
 {
     public static FluentEmailServicesBuilder AddSendinblueSender(this FluentEmailServicesBuilder builder, string apiKey)
     {
