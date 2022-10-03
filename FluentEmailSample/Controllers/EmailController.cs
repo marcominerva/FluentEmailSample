@@ -1,15 +1,6 @@
-using System.Net.Mime;
-using FluentEmail.Core;
-using FluentEmail.Core.Models;
-using FluentEmailSample.Models;
-using Microsoft.AspNetCore.Mvc;
-
 namespace FluentEmailSample.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-[Produces(MediaTypeNames.Application.Json)]
-public class EmailController : ControllerBase
+public class EmailController : Common.ControllerBase
 {
     private readonly IFluentEmail fluentEmail;
 
@@ -19,8 +10,6 @@ public class EmailController : ControllerBase
     }
 
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesDefaultResponseType]
     public async Task<IActionResult> Send(EmailContent message)
     {
@@ -48,8 +37,6 @@ public class EmailController : ControllerBase
     }
 
     [HttpPost("template")]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesDefaultResponseType]
     public async Task<IActionResult> SendTemplate(TemplatedEmailContent message)
     {

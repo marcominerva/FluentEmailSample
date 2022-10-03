@@ -1,11 +1,4 @@
-﻿using FluentEmail.Core;
-using FluentEmail.Core.Interfaces;
-using FluentEmail.Core.Models;
-using sib_api_v3_sdk.Api;
-using sib_api_v3_sdk.Client;
-using sib_api_v3_sdk.Model;
-
-namespace FluentEmailSample.Sendinblue;
+﻿namespace FluentEmailSample.Sendinblue;
 
 public class SendinblueSender : ISender
 {
