@@ -1,8 +1,4 @@
-﻿using FluentEmail.Core.Interfaces;
-using FluentEmailSample.Sendinblue;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-
-namespace FluentEmailSample.Extensions;
+﻿namespace FluentEmailSample.Extensions;
 
 public static class FluentEmailSendinblueBuilderExtensions
 {
