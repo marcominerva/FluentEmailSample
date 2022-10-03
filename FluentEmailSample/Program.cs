@@ -12,7 +12,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddFluentEmail("noreply@email.com")
     .AddRazorRenderer()
-    .AddSendinblueSender("");
+    //.AddSendGridSender(apiKey: "", sandBoxMode: true)
+    .AddSendinblueSender(apiKey: "");
 
 var app = builder.Build();
 

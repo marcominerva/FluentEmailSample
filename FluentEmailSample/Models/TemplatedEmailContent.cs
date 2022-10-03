@@ -10,5 +10,7 @@ public class TemplatedEmailContent
 
     public string Subject { get; set; }
 
-    public string Name { get; set; }
+    public Model Model { get; set; }
 }
+
+public record class Model(string Name);

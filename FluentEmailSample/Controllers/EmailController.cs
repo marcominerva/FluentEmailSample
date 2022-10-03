@@ -1,4 +1,4 @@
-using System.Diagnostics;
+using System.Net.Mime;
 using FluentEmail.Core;
 using FluentEmail.Core.Models;
 using FluentEmailSample.Models;
@@ -8,6 +8,7 @@ namespace FluentEmailSample.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Produces(MediaTypeNames.Application.Json)]
 public class EmailController : ControllerBase
 {
     private readonly IFluentEmail fluentEmail;
@@ -18,6 +19,9 @@ public class EmailController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesDefaultResponseType]
     public async Task<IActionResult> Send(EmailContent message)
     {
         var response = await fluentEmail
@@ -36,7 +40,7 @@ public class EmailController : ControllerBase
 
         if (response.Successful)
         {
-            return Accepted();
+            return StatusCode(StatusCodes.Status201Created);
         }
 
         var problem = ProblemDetailsFactory.CreateProblemDetails(HttpContext, StatusCodes.Status400BadRequest, response.ErrorMessages.FirstOrDefault());
@@ -44,22 +48,31 @@ public class EmailController : ControllerBase
     }
 
     [HttpPost("template")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesDefaultResponseType]
     public async Task<IActionResult> SendTemplate(TemplatedEmailContent message)
     {
         var response = await fluentEmail
-            .To("marco.minerva@gmail.com")
-            .Subject("Messaggio di prova")
-            //.Body("Questa è la prova incredibile di un messaggio che sto inviando con FluentEmail")
-            .UsingTemplate("Ciao, @Model.Name", new { Name = "Marco" })
-            .Attach(new Attachment
-            {
-                Data = System.IO.File.OpenRead(@"D:\Taggia.jpg"),
-                Filename = "Taggia.jpg"
-            })
+            .To(message.Receivers.Select(x => new Address(x)))
+            .CC(message.CcReceivers.Select(x => new Address(x)))
+            .BCC(message.BccReceivers.Select(x => new Address(x)))
+            .Subject(message.Subject)
+            .UsingTemplate("Hello, @Model.Name! The current server time is: @System.DateTimeOffset.Now", new { message.Model?.Name })
+            //.Attach(new Attachment
+            //{
+            //    Data = System.IO.File.OpenRead(@"D:\Taggia.jpg"),
+            //    Filename = "Taggia.jpg",
+            //    ContentType = "image/jpeg"
+            //})
             .SendAsync();
 
-        Debug.WriteLine(response);
+        if (response.Successful)
+        {
+            return StatusCode(StatusCodes.Status201Created);
+        }
 
-        return Accepted();
+        var problem = ProblemDetailsFactory.CreateProblemDetails(HttpContext, StatusCodes.Status400BadRequest, response.ErrorMessages.FirstOrDefault());
+        return StatusCode(StatusCodes.Status400BadRequest, problem);
     }
 }
